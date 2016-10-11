@@ -4,3 +4,9 @@ D:\Dokumente\GitHub\Projects\RGB Led Control\SerialTestSender\Sender\Sender\bin\
 D:\Dokumente\GitHub\Projects\RGB Led Control\SerialTestSender\Sender\Sender\obj\Debug\Sender.csprojResolveAssemblyReference.cache
 D:\Dokumente\GitHub\Projects\RGB Led Control\SerialTestSender\Sender\Sender\obj\Debug\Sender.exe
 D:\Dokumente\GitHub\Projects\RGB Led Control\SerialTestSender\Sender\Sender\obj\Debug\Sender.pdb
+C:\Users\Paul Camerloher\Documents\GitHub\Projects\RGB Led Control\SerialTestSender\Sender\Sender\bin\Debug\Sender.exe.config
+C:\Users\Paul Camerloher\Documents\GitHub\Projects\RGB Led Control\SerialTestSender\Sender\Sender\obj\Debug\Sender.exe
+C:\Users\Paul Camerloher\Documents\GitHub\Projects\RGB Led Control\SerialTestSender\Sender\Sender\obj\Debug\Sender.pdb
+C:\Users\Paul Camerloher\Documents\GitHub\Projects\RGB Led Control\SerialTestSender\Sender\Sender\bin\Debug\Sender.exe
+C:\Users\Paul Camerloher\Documents\GitHub\Projects\RGB Led Control\SerialTestSender\Sender\Sender\bin\Debug\Sender.pdb
+C:\Users\Paul Camerloher\Documents\GitHub\Projects\RGB Led Control\SerialTestSender\Sender\Sender\obj\Debug\Sender.csprojResolveAssemblyReference.cache

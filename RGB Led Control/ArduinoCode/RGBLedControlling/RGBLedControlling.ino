@@ -1,6 +1,6 @@
-const int pinLedRed = 10;
+const int pinLedRed = 9;
 const int pinLedGreen = 10;
-const int pinLedBlue = 10;
+const int pinLedBlue = 11;
 void setup()
 {
 	pinMode(pinLedRed, OUTPUT);
@@ -12,7 +12,7 @@ void setup()
 
 void loop()
 {
-	if (Serial.available() > 0)
+	if (Serial.available() == 3)
 	{
 		int a = Serial.read();
 		int b = Serial.read();
@@ -25,6 +25,6 @@ void loop()
 
 void setColor(int a, int b, int c){
 	analogWrite(pinLedRed, a);
-	analogWrite(pinLedRed, b);
-	analogWrite(pinLedRed, c);
+	analogWrite(pinLedGreen, b);
+	analogWrite(pinLedBlue, c);
 }

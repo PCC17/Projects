@@ -19,6 +19,7 @@ namespace Sender
                 byte b = Convert.ToByte(Console.ReadLine());
                 byte c = Convert.ToByte(Console.ReadLine());
                 sp.Write(new byte[] { a, b, c }, 0, 3);
+
             }
         }
     }
