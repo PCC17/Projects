@@ -12,7 +12,7 @@ namespace Server
 {
     class Program
     {
-        const int SERVER_PORT = 33123;
+        const int SERVER_PORT = 51512;
         const int MSG_LENGTH = 3;
         static SerialPort arduino;
 
@@ -30,7 +30,7 @@ namespace Server
             IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
 
             arduino = new SerialPort(port, baudrate);
-            arduino.Open();
+           arduino.Open();
 
             while (true)
             {
@@ -39,14 +39,18 @@ namespace Server
                     byte[] msg = server.Receive(ref sender);
                     if (msg.Length == MSG_LENGTH)
                     {
-                        arduino.Write(msg, 0, msg.Length);
+                        foreach (var v in msg)
+                        {
+                            Console.WriteLine(v);
+                        }
+                      arduino.Write(msg, 0, msg.Length);
                     }
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
                 }
-                Thread.Sleep(100);
+                Thread.Sleep(10);
             }
         }
     }
