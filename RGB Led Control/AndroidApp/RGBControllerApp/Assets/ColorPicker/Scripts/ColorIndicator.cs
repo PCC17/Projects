@@ -3,7 +3,8 @@ using UnityEngine;
 public class ColorIndicator : MonoBehaviour
 {
 
-    [SerializeField] private ScriptLogic scriptLogic;
+    [SerializeField]
+    private SenderScript scriptLogic;
 
     HSBColor color;
 
@@ -17,9 +18,7 @@ public class ColorIndicator : MonoBehaviour
 		GetComponent<Renderer>().sharedMaterial.SetColor ("_Color", color.ToColor());
 		transform.parent.BroadcastMessage("OnColorChange", color, SendMessageOptions.DontRequireReceiver);
         scriptLogic.SendData(new []{ (byte)(color.ToColor().r *255), (byte)(color.ToColor().g * 255), (byte)(color.ToColor().b * 255), });
-        Debug.Log("hello");
-
-    }
+	}
 
 	void SetHue(float hue)
 	{

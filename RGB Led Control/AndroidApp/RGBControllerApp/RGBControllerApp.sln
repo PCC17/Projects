@@ -1,7 +1,11 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
+Project("{3E0B61CF-FBE7-DE0C-D3DF-8950B69B551C}") = "RGBControllerApp", "Assembly-CSharp-firstpass.csproj", "{AE6F9A5B-AFBF-A305-7BA1-55B4C2A4D80C}"
+EndProject
 Project("{3E0B61CF-FBE7-DE0C-D3DF-8950B69B551C}") = "RGBControllerApp", "Assembly-CSharp.csproj", "{9123527A-83C1-0014-9724-FAC2EF39C88E}"
+EndProject
+Project("{3E0B61CF-FBE7-DE0C-D3DF-8950B69B551C}") = "RGBControllerApp", "Assembly-CSharp-Editor.csproj", "{DD4519EB-23B7-F2E4-B69B-0E4DF9CF6E1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +13,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE6F9A5B-AFBF-A305-7BA1-55B4C2A4D80C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE6F9A5B-AFBF-A305-7BA1-55B4C2A4D80C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE6F9A5B-AFBF-A305-7BA1-55B4C2A4D80C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE6F9A5B-AFBF-A305-7BA1-55B4C2A4D80C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9123527A-83C1-0014-9724-FAC2EF39C88E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9123527A-83C1-0014-9724-FAC2EF39C88E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9123527A-83C1-0014-9724-FAC2EF39C88E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9123527A-83C1-0014-9724-FAC2EF39C88E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD4519EB-23B7-F2E4-B69B-0E4DF9CF6E1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD4519EB-23B7-F2E4-B69B-0E4DF9CF6E1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD4519EB-23B7-F2E4-B69B-0E4DF9CF6E1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD4519EB-23B7-F2E4-B69B-0E4DF9CF6E1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
