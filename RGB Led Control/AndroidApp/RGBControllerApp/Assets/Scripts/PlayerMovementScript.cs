@@ -19,14 +19,12 @@ public class PlayerMovementScript : MonoBehaviour
 
     private Animator animator;
     private AudioSource audioSourceFoodStep;
-    private MeshRenderer bodyMeshRenderer;
 
 	// Use this for initialization
 	void Start ()
 	{
 	    animator = body.GetComponent<Animator>();
 	    audioSourceFoodStep = body.GetComponent<AudioSource>();
-	    bodyMeshRenderer = body.GetComponent<MeshRenderer>();
 	}
 	
 	// Update is called once per frame
@@ -54,6 +52,14 @@ public class PlayerMovementScript : MonoBehaviour
         isJumping = true;
         animator.SetTrigger("Jump");
         targetPosition = transform.position + direction;
+        if (direction == Vector3.forward)
+            transform.rotation = Quaternion.Euler(0,0,0);
+        if (direction == Vector3.right)
+            transform.rotation = Quaternion.Euler(0, 90, 0);
+        if (direction == Vector3.back)
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        if (direction == Vector3.left)
+            transform.rotation = Quaternion.Euler(0, -90, 0);
     }
 
     void ProcedureJump()
@@ -64,7 +70,6 @@ public class PlayerMovementScript : MonoBehaviour
             audioSourceFoodStep.Play();
             particleSystemLanding.Play();
             Color c = GetColorUnderPlayer();
-            bodyMeshRenderer.material.color = c;
             senderScript.SendData(new[] { (byte)(c.r * 255), (byte)(c.g * 255), (byte)(c.b * 255) });
             isJumping = false;
         }

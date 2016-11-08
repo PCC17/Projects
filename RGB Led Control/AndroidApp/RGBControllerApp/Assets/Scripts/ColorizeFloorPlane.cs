@@ -13,7 +13,7 @@ public class ColorizeFloorPlane : MonoBehaviour
     void Start () {
 	    texture2D = new Texture2D(30, 30);
         GetTextureWithRandomColors(ref texture2D, colors);
-        texture2D.filterMode= FilterMode.Bilinear;
+        texture2D.filterMode= FilterMode.Point;
         texture2D.Apply();
 
         GetComponent<Renderer>().material.SetTexture("_MainTex", texture2D);
