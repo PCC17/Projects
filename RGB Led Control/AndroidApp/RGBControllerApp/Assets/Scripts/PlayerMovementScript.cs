@@ -9,8 +9,7 @@ public class PlayerMovementScript : MonoBehaviour
     private float precission = 0.1f;
     [SerializeField]
     private GameObject body;
-    [SerializeField]
-    private ParticleSystem particleSystemLanding;
+
     [SerializeField]
     private SenderScript senderScript;
 
@@ -20,28 +19,35 @@ public class PlayerMovementScript : MonoBehaviour
     private Animator animator;
     private AudioSource audioSourceFoodStep;
 
+    private TouchManager touchManager;
+
 	// Use this for initialization
 	void Start ()
 	{
 	    animator = body.GetComponent<Animator>();
 	    audioSourceFoodStep = body.GetComponent<AudioSource>();
-	}
+        touchManager = TouchManager.Instance;
+
+    }
 	
 	// Update is called once per frame
-	void FixedUpdate () {
-
-	    if (!isJumping)
+	void FixedUpdate ()
+	{
+        touchManager.Update();
+	    if (!isJumping && !animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
 	    {
-	        if (Input.GetKeyDown(KeyCode.RightArrow))
+
+	        if (touchManager.State == TouchManager.ETouch.SwipeRight)
 	            MakeJump(Vector3.right);
-	        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+	        if (touchManager.State == TouchManager.ETouch.SwipeLeft)
 	            MakeJump(Vector3.left);
-	        if (Input.GetKeyDown(KeyCode.UpArrow))
+	        if (touchManager.State == TouchManager.ETouch.SwipeUp)
 	            MakeJump(Vector3.forward);
-	        else if (Input.GetKeyDown(KeyCode.DownArrow))
+	        if (touchManager.State == TouchManager.ETouch.SwipeDown)
 	            MakeJump(Vector3.back);
+
 	    }
-        if (isJumping)
+	    if (isJumping)
         {
             ProcedureJump();
         }
@@ -49,6 +55,8 @@ public class PlayerMovementScript : MonoBehaviour
 
     void MakeJump(Vector3 direction)
     {
+        touchManager.Reset();
+
         isJumping = true;
         animator.SetTrigger("Jump");
         targetPosition = transform.position + direction;
@@ -68,7 +76,6 @@ public class PlayerMovementScript : MonoBehaviour
         if (Mathf.Abs(Vector3.Distance(transform.position, targetPosition)) <= precission)
         {
             audioSourceFoodStep.Play();
-            particleSystemLanding.Play();
             Color c = GetColorUnderPlayer();
             senderScript.SendData(new[] { (byte)(c.r * 255), (byte)(c.g * 255), (byte)(c.b * 255) });
             isJumping = false;
