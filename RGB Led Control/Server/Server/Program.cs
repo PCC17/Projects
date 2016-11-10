@@ -41,11 +41,8 @@ namespace Server
                     {
                         msg[1] = (byte) (msg[1] * blueFactor);
                         msg[2] = (byte) (msg[2] * greenFactor);
-                        foreach (var v in msg)
-                        {
-                            Console.WriteLine(v);
-                        }
-                      arduino.Write(msg, 0, msg.Length);
+                        Console.WriteLine("R: " + msg[0] + " G: " + msg[1] + " B: " + msg[2]);
+                        arduino.Write(msg, 0, msg.Length);
                     }
                 }
                 catch (Exception ex)

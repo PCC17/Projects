@@ -8,7 +8,7 @@ public class SenderScript : MonoBehaviour {
     UdpClient udpClient;
 	void Awake () {
 	    udpClient = new UdpClient();
-        IPEndPoint ep = new IPEndPoint(IPAddress.Parse("10.0.0.255"), 51512);
+        IPEndPoint ep = new IPEndPoint(IPAddress.Broadcast, 51512);
         udpClient.Connect(ep);
     }
 	
