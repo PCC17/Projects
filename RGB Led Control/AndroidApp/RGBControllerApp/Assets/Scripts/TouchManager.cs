@@ -1,21 +1,27 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
+
+public delegate void DelegateClickBegan();
+public delegate void DelegateClickEnded();
+public delegate void DelegateSwipeRight ();
+public delegate void DelegateSwipeLeft();
+public delegate void DelegateSwipeUp();
+public delegate void DelegateSwipeDown();
+
 
 public class TouchManager
 {
-    public enum ETouch
-    {
-        Ended,
-        SwipeUp,
-        SwipeRight,
-        SwipeDown,
-        SwipeLeft,
-        Null
-    };
+
+    public DelegateClickBegan delClickBegan;
+    public DelegateClickEnded DelClickEnded;
+    public DelegateSwipeRight delSwipeRight;
+    public DelegateSwipeLeft delSwipeLeft;
+    public DelegateSwipeUp delSwipeUp;
+    public DelegateSwipeDown delSwipeDown;
+
     private float minPosChange = 2f;
-    private ETouch state;
     private Vector2 lastTouch, currentTouch;
-    private bool isNewMove = false;
     private static TouchManager instance;
 
 
@@ -45,20 +51,24 @@ public class TouchManager
 #if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
         {
+            //delClickBegan();
             lastTouch = Input.mousePosition;
-            isNewMove = true;
         }
         if (Input.GetMouseButton(0))
+        {
             currentTouch = Input.mousePosition;
+         
+        }
         if (Input.GetMouseButtonUp(0))
-                if (IsRightSwipe())
-                    state = ETouch.SwipeRight;
-                else if (IsLeftSwipe())
-                    state = ETouch.SwipeLeft;
-                else if(IsUpSwipe())
-                    state = ETouch.SwipeUp;
-                else if (IsDownSwipe())
-                    state = ETouch.SwipeDown;
+            if (IsRightSwipe())
+                delSwipeRight();
+            else if (IsLeftSwipe())
+                delSwipeLeft();
+            else if (IsUpSwipe())
+                delSwipeUp();
+            else if (IsDownSwipe())
+                delSwipeDown();
+       
 #endif
 
 #if UNITY_ANDROID
@@ -69,18 +79,18 @@ public class TouchManager
             if (GetTouchPhaseOfTouch(0) == TouchPhase.Began)
             {
                 lastTouch = Input.GetTouch(0).position;
-                isNewMove = true;
             }
-            if ((GetTouchPhaseOfTouch(0) == TouchPhase.Ended || GetTouchPhaseOfTouch(0) == TouchPhase.Canceled) && isNewMove)
+            if ((GetTouchPhaseOfTouch(0) == TouchPhase.Ended || GetTouchPhaseOfTouch(0) == TouchPhase.Canceled))
             {
                 if (IsRightSwipe())
-                    state = ETouch.SwipeRight;
+                    delSwipeRight();
                 else if (IsLeftSwipe())
-                    state = ETouch.SwipeLeft;
+                    delSwipeLeft();
                 else if (IsUpSwipe())
-                    state = ETouch.SwipeUp;
+                    delSwipeUp();
                 else if (IsDownSwipe())
-                    state = ETouch.SwipeDown;
+                    delSwipeDown();
+        
             }
         }
 #endif
@@ -105,22 +115,7 @@ public class TouchManager
         set { minPosChange = value; }
     }
 
-    public ETouch State
-    {
-        get {
-            if (isNewMove)
-            {
-                return state;
-            }
-            return ETouch.Null;
-        }
-    }
 
-    public void Reset()
-    {
-        isNewMove = false;
-        state = ETouch.Null;
-    }
 
     private TouchPhase GetTouchPhaseOfTouch(int i)
     {

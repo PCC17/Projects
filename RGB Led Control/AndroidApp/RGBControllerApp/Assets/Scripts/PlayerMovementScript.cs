@@ -11,6 +11,11 @@ public class PlayerMovementScript : MonoBehaviour
     private GameObject body;
 
     [SerializeField]
+    private Transform endPoint1;
+    [SerializeField]
+    private Transform endPoint2;
+
+    [SerializeField]
     private SenderScript senderScript;
 
     private bool isJumping;
@@ -28,46 +33,83 @@ public class PlayerMovementScript : MonoBehaviour
 	    audioSourceFoodStep = body.GetComponent<AudioSource>();
         touchManager = TouchManager.Instance;
 
+	    //touchManager.delClickBegan += PlayAnimationSquat;
+	    //touchManager.DelClickEnded += PlayAnimationStandUp;
+        touchManager.delSwipeRight += MakeJumpRight;
+        touchManager.delSwipeLeft += MakeJumpLeft;
+        touchManager.delSwipeUp += MakeJumpForward;
+        touchManager.delSwipeDown += MakeJumpBack;
+
+
     }
 	
 	// Update is called once per frame
 	void FixedUpdate ()
 	{
-        touchManager.Update();
-	    if (!isJumping && !animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
-	    {
-
-	        if (touchManager.State == TouchManager.ETouch.SwipeRight)
-	            MakeJump(Vector3.right);
-	        if (touchManager.State == TouchManager.ETouch.SwipeLeft)
-	            MakeJump(Vector3.left);
-	        if (touchManager.State == TouchManager.ETouch.SwipeUp)
-	            MakeJump(Vector3.forward);
-	        if (touchManager.State == TouchManager.ETouch.SwipeDown)
-	            MakeJump(Vector3.back);
-
-	    }
+	    touchManager.Update();
 	    if (isJumping)
         {
             ProcedureJump();
         }
     }
 
+    void PlayAnimationSquat()
+    {
+        Debug.Log("Squat");
+        if (!isJumping && animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerAnimations"))
+            animator.SetTrigger("Squat");
+    }
+
+    void PlayAnimationStandUp()
+    {
+        Debug.Log("AntiSquat");
+       // if (!isJumping && animator.GetCurrentAnimatorStateInfo(0).IsName("BeforeJumpIdle"))
+            animator.SetTrigger("AntiSquat");
+    }
+
+    void MakeJumpForward()
+    {
+        Debug.Log("Forward");
+        if (!isJumping && !animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+            MakeJump(Vector3.forward);
+    }
+    void MakeJumpBack()
+    {
+        Debug.Log("Back");
+        if (!isJumping && !animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+            MakeJump(Vector3.back);
+    }
+    void MakeJumpRight()
+    {
+        Debug.Log("Right");
+        if (!isJumping && !animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+            MakeJump(Vector3.right);
+    }
+    void MakeJumpLeft()
+    {
+        Debug.Log("Left");
+        if (!isJumping && !animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+            MakeJump(Vector3.left);
+    }
+
     void MakeJump(Vector3 direction)
     {
-        touchManager.Reset();
-
-        isJumping = true;
-        animator.SetTrigger("Jump");
-        targetPosition = transform.position + direction;
-        if (direction == Vector3.forward)
-            transform.rotation = Quaternion.Euler(0,0,0);
-        if (direction == Vector3.right)
-            transform.rotation = Quaternion.Euler(0, 90, 0);
-        if (direction == Vector3.back)
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-        if (direction == Vector3.left)
-            transform.rotation = Quaternion.Euler(0, -90, 0);
+        if(transform.position.x + direction.x < endPoint1.position.x && transform.position.x + direction.x > endPoint2.position.x)
+            if (transform.position.z + direction.z > endPoint1.position.z &&
+                transform.position.z + direction.z < endPoint2.position.z)
+            {
+                isJumping = true;
+                animator.SetTrigger("Jump");
+                targetPosition = transform.position + direction;
+                if (direction == Vector3.forward)
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                if (direction == Vector3.right)
+                    transform.rotation = Quaternion.Euler(0, 90, 0);
+                if (direction == Vector3.back)
+                    transform.rotation = Quaternion.Euler(0, 180, 0);
+                if (direction == Vector3.left)
+                    transform.rotation = Quaternion.Euler(0, -90, 0);
+            }
     }
 
     void ProcedureJump()
