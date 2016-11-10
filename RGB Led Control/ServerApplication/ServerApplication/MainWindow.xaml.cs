@@ -25,7 +25,7 @@ namespace ServerApplication
         private float greenFactor = 0.4f;
 
         private Server server;
-
+        private ArduinoCommunication arduino;
 
         public MainWindow()
         {
@@ -34,6 +34,8 @@ namespace ServerApplication
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
+            arduino = new ArduinoCommunication(txtComPort.Text, 9600);
+
             server = new Server(Convert.ToInt32(txtPort.Text), 3);
             server.hB += AddIncomingToLog;
             server.StartServer();
@@ -51,8 +53,9 @@ namespace ServerApplication
             Application.Current.Dispatcher.Invoke(new Action(() => {
                 txbLog.Text += "\n" + DateTime.Now + ": " + "R: " + b[0] + "; " + "G: " + b[1] + "; " + "B: " + b[2] + "; ";
                 canvas.Background = new SolidColorBrush(Color.FromRgb(b[0], b[1], b[2]));
-                //msg[1] = (byte)(msg[1] * greenFactor);
-                //msg[2] = (byte)(msg[2] * blueFactor);
+                b[1] = (byte)(b[1] * greenFactor);
+                b[2] = (byte)(b[2] * blueFactor);
+                arduino.SendData(b);
             }));
             
         }
