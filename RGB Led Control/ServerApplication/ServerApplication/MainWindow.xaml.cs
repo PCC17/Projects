@@ -56,5 +56,12 @@ namespace ServerApplication
             }));
             
         }
+
+        private void txbLog_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox t = (TextBox)sender;
+            t.CaretIndex = t.Text.Length;
+            t.ScrollToEnd();
+        }
     }
 }

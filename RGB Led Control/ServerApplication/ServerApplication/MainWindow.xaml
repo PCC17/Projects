@@ -5,17 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ServerApplication"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="515.6">
+        Title="Server" Height="350" Width="515.6" ResizeMode="NoResize">
     <Grid>
         <Image x:Name="imColor" HorizontalAlignment="Left" Height="156" Margin="10,157,0,0" VerticalAlignment="Top" Width="165"/>
-        <Button x:Name="btnStart" Content="Start" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top" Width="80" Height="20" Click="btnStart_Click"/>
-        <Button x:Name="btnStop" Content="Stop" HorizontalAlignment="Left" Margin="95,102,0,0" VerticalAlignment="Top" Width="80" Height="20" Click="btnStop_Click"/>
-        <Label x:Name="lblServer" Content="Server" HorizontalAlignment="Left" VerticalAlignment="Top" Width="165" FontSize="20" Margin="10,0,0,0" Height="41"/>
-        <Label x:Name="lblServerState" Content="State: stopped" HorizontalAlignment="Left" VerticalAlignment="Top" Width="165" Margin="10,127,0,0" Height="25" Background="#FFB1B1B1"/>
-        <TextBlock x:Name="txbLog" HorizontalAlignment="Left" Margin="180,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="303" Width="321" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
-        <TextBox x:Name="txtPort" HorizontalAlignment="Left" Height="23" Margin="10,46,0,0" TextWrapping="Wrap" Text="Serverport" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtComPort" HorizontalAlignment="Left" Height="23" Margin="10,74,0,0" TextWrapping="Wrap" Text="Com - Port" VerticalAlignment="Top" Width="120"/>
-        <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="156" Margin="10,157,0,0" VerticalAlignment="Top" Width="165" Background="White"/>
+        <Button x:Name="btnStart" Content="Start" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Width="80" Height="20" Click="btnStart_Click"/>
+        <Button x:Name="btnStop" Content="Stop" HorizontalAlignment="Left" Margin="95,66,0,0" VerticalAlignment="Top" Width="80" Height="20" Click="btnStop_Click"/>
+        <Label x:Name="lblServerState" Content="State: stopped" HorizontalAlignment="Left" VerticalAlignment="Top" Width="165" Margin="10,91,0,0" Height="25" Background="#FFB1B1B1"/>
+        <TextBox x:Name="txtPort" HorizontalAlignment="Left" Height="23" Margin="95,10,0,0" TextWrapping="Wrap" Text="51512" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="txtComPort" HorizontalAlignment="Left" Height="23" Margin="95,38,0,0" TextWrapping="Wrap" Text="COM3" VerticalAlignment="Top" Width="80"/>
+        <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="192" Margin="10,121,0,0" VerticalAlignment="Top" Width="165" Background="White"/>
+        <Label x:Name="label" Content="Server - Port" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="23"/>
+        <Label x:Name="label_Copy" Content="Com - Port" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Width="80" Height="23"/>
+        <TextBox x:Name="txbLog" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="301" Width="319" VerticalScrollBarVisibility="Auto" Margin="180,10,0,0" BorderBrush="Gray" Background="#FFB1B1B1" TextChanged="txbLog_TextChanged"/>
+
 
     </Grid>
 </Window>

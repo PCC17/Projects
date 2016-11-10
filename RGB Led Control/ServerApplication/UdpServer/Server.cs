@@ -10,13 +10,11 @@ using System.Threading.Tasks;
 
 namespace ServerArduinoCommunication
 {
-     public delegate void HandleBytes(byte[] array);
-
-
+    public delegate void HandleBytes(byte[] array);
     public class Server
     {
 
-
+        private UdpClient server;
         private IPAddress ipAddress = IPAddress.Any;
         private int serverPort = 51512;
         private int msgLength = 3;
@@ -40,29 +38,22 @@ namespace ServerArduinoCommunication
         public void StopServer()
         {
             if (serverThread.ThreadState == ThreadState.Running)
+            {
                 serverThread.Abort();
+                server.Close();
+            }
         }
 
         private void ServerThread()
         {
 
-            UdpClient server = new UdpClient(new IPEndPoint(IPAddress.Any, serverPort));
+            server = new UdpClient(new IPEndPoint(IPAddress.Any, serverPort));
             IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
             while (true)
             {
-                try
-                {
-                    byte[] msg = server.Receive(ref sender);
-                    if (msg.Length == msgLength)
-                    {
-                 
-                        hB(msg);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    //Console.WriteLine(ex);
-                }
+                byte[] msg = server.Receive(ref sender);
+                if (msg.Length == msgLength)
+                    hB(msg);
             }
         }
 
