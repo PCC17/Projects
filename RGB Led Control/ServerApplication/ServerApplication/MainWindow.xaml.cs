@@ -22,7 +22,7 @@ namespace ServerApplication
     public partial class MainWindow : Window
     {
         private float blueFactor = 0.4f;
-        private float greenFactor = 0.4f;
+        private float greenFactor = 0.7f;
 
         private Server server;
         private ArduinoCommunication arduino;
@@ -51,7 +51,8 @@ namespace ServerApplication
         private void AddIncomingToLog(byte[] b)
         {
             Application.Current.Dispatcher.Invoke(new Action(() => {
-                txbLog.Text += "\n" + DateTime.Now + ": " + "R: " + b[0] + "; " + "G: " + b[1] + "; " + "B: " + b[2] + "; ";
+
+                //txbLog.Text += "\n" + DateTime.Now + ": " + "R: " + b[0] + "; " + "G: " + b[1] + "; " + "B: " + b[2] + "; ";
                 canvas.Background = new SolidColorBrush(Color.FromRgb(b[0], b[1], b[2]));
                 b[1] = (byte)(b[1] * greenFactor);
                 b[2] = (byte)(b[2] * blueFactor);

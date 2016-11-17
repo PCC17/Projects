@@ -16,6 +16,7 @@ namespace ServerArduinoCommunication
         public ArduinoCommunication(string port, int baudrate)
         {
             serialPort = new SerialPort(port, baudrate);
+            serialPort.Open();
         }
 
         public void SendData(byte[] bytes)
