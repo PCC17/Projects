@@ -15,13 +15,17 @@ namespace ServerArduinoCommunication
         private SerialPort serialPort;
         public ArduinoCommunication(string port, int baudrate)
         {
+<<<<<<< HEAD
             serialPort = new SerialPort(port, baudrate);
             serialPort.Open();
+=======
+           // serialPort = new SerialPort(port, baudrate);
+>>>>>>> 8fec47574163fc43cc696b8417c266744031177b
         }
 
         public void SendData(byte[] bytes)
         {
-            serialPort.Write(bytes, 0, bytes.Length);
+            //serialPort.Write(bytes, 0, bytes.Length);
         }
     }
 }
